@@ -38,6 +38,7 @@ public class Hintsite extends DroidGap
         
         // empty string represents broadcast channel
         PushService.subscribe(this, "", Hintsite.class);
+        PushService.subscribe(this, "foo", Hintsite.class);
     }
 }
 
