@@ -22,6 +22,8 @@ package com.hintsite.app;
 import android.os.Bundle;
 import org.apache.cordova.*;
 
+import com.parse.*;
+
 public class Hintsite extends DroidGap
 {
     @Override
@@ -31,6 +33,11 @@ public class Hintsite extends DroidGap
         // Set by <content src="index.html" /> in config.xml
         super.loadUrl(Config.getStartUrl());
         //super.loadUrl("file:///android_asset/www/index.html")
+        
+        Parse.initialize(this, "LkaGTOk7RGUaPXM0r9HQImwPAnmqUuhjF1QttcNE", "gFGAZ5IOuiTppblG1bMNmyh5H1lD8c22oFSjRsl7");
+        
+        // empty string represents broadcast channel
+        PushService.subscribe(this, "", Hintsite.class);
     }
 }
 
