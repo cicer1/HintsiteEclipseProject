@@ -56,6 +56,10 @@
     <plugin name="Globalization" value="org.apache.cordova.Globalization"/>
     <plugin name="InAppBrowser" value="org.apache.cordova.InAppBrowser"/>
     <plugin name="org.apache.cordova.facebook.Connect" value="org.apache.cordova.facebook.ConnectPlugin" />
+    <plugin name="com.hintsite.app.ChannelSubscription" value="com.hintsite.app.ChannelSubscription" />
 </plugins>
+<feature name="ChannelSubscription">
+       <param name="channel-subscription" value="com.hintsite.app.ChannelSubscription" />
+</feature>
 </cordova>
 
