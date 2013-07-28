@@ -2,7 +2,10 @@ package com.hintsite.app;
 import org.apache.cordova.api.CallbackContext;
 import org.apache.cordova.api.CordovaPlugin;
 import org.json.JSONArray;
+import org.json.JSONException;
+
 import android.util.Log;
+
 import com.parse.PushService;
 
 
@@ -14,11 +17,11 @@ public class ChannelSubscription extends CordovaPlugin {
 		Log.d("SUBSCRIBING", "execute() called.");
 
 		if (SUBSCRIBE_TO_CHANNEL.equals(action)) {
-			String channel = "";
+			String channel = null;
 			try {
 				channel = data.getString(0);
 				Log.d("SUBSCRIBING", "Retrieved channel name: " + channel);
-			} catch (Exception ex) {
+			} catch (JSONException ex) {
 				Log.d("SUBSCRIBING", ex.getMessage());
 				callbackContext.error(ex.getMessage());
 				return false;
