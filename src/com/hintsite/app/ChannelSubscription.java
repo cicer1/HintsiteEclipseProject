@@ -1,40 +1,36 @@
 package com.hintsite.app;
 import org.apache.cordova.api.CallbackContext;
-import org.apache.cordova.api.Plugin;
-import org.apache.cordova.api.PluginResult;
+import org.apache.cordova.api.CordovaPlugin;
 import org.json.JSONArray;
-
+import android.util.Log;
 import com.parse.PushService;
 
-import android.util.Log;
 
-
-public class ChannelSubscription extends Plugin {
+public class ChannelSubscription extends CordovaPlugin {
 	public static final String SUBSCRIBE_TO_CHANNEL="subscribeToChannel"; 
     
 	@Override
-	public PluginResult execute(String action, JSONArray data, final String callbackId) {
+	public boolean execute(String action, JSONArray data, CallbackContext callbackContext) {
 		Log.d("SUBSCRIBING", "execute() called.");
 
 		if (SUBSCRIBE_TO_CHANNEL.equals(action)) {
 			String channel = "";
 			try {
 				channel = data.getString(0);
+				Log.d("SUBSCRIBING", "Retrieved channel name: " + channel);
 			} catch (Exception ex) {
-//				callbackContext.error(ex.getMessage());
 				Log.d("SUBSCRIBING", ex.getMessage());
-				return new PluginResult(PluginResult.Status.OK);
+				callbackContext.error(ex.getMessage());
+				return false;
 			}
 			
+			PushService.subscribe(this.webView.getContext(), channel, Hintsite.class);
 			
-			// uncommenting next line breaks app - problems with context
-			//PushService.subscribe(, channel, Hintsite.class);
-			Log.d("Daicazzo", "te prego");
-//			callbackContext.success();
-			return new PluginResult(PluginResult.Status.OK);
+			callbackContext.success();
+			return true;
 		} else {
-//			callbackContext.error("Invalid action");
-			return new PluginResult(PluginResult.Status.ERROR);
+			callbackContext.error("Invalid action");
+			return false;
 		}
 	}
 
